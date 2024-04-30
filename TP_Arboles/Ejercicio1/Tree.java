@@ -1,5 +1,7 @@
-package TP_Arboles;
+package TP_Arboles.Ejercicio1;
 
+
+import TP_Arboles.Ejercicio1.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +49,7 @@ public class Tree {
     }
 
     private boolean hasElem(TreeNode actual, Integer elem) {
-        if (actual.getValue() == elem) {//si es igual devuelvo true
+        if (actual.getValue().equals(elem)) {//si es igual devuelvo true
             return true;
         } else if (actual.getValue() > elem) {//si es menor chequeo q haya un nodo izquierdo, si lo hay lo paso como raiz, si no encuentra es false
             if (actual.getLeft() == null) {
@@ -272,7 +274,71 @@ public class Tree {
         return successor;
     }
 
+    public int sum(){
+        return sum(this.root);
+    }
+    private int sum(TreeNode current){
+
+        if (current==null){
+            return 0;
+        }
+        if (current.getRight()!=null && current.getLeft()!=null){//has both children, recursive call to both
+            return current.getValue()+sum(current.getRight())+sum(current.getLeft());
+        } else if (current.getRight()==null) {//recursive call to left child
+            return current.getValue()+sum(current.getLeft());
+        }else{
+            return current.getValue()+sum(current.getRight());
+        }
+    }
+    
+    //option 1 more optimized
+    public List<Integer>leafsBigger(Integer value){
+        List<Integer>leafs=new ArrayList<>();
+        leafsBigger(value,this.root,leafs);
+        return leafs;
+    }
+
+    private void leafsBigger(Integer value,TreeNode current,List<Integer> leafs){
+
+        if (current.getRight()==null && current.getLeft()==null && value<current.getValue()){
+            leafs.add(current.getValue());
+        }
+        else if (current.getRight()==null){
+            leafsBigger(value,current.getLeft(),leafs);
+        }else if (current.getLeft()==null){
+            leafsBigger(value,current.getRight(),leafs);
+        }else {
+            leafsBigger(value,current.getRight(),leafs);
+            leafsBigger(value,current.getLeft(),leafs);
+        }
+    }
+
+    //option 2 less optimized
+    public List<Integer> leafsBiggerThan(Integer value){
+        return leafsBiggerThan(value,this.root);
+    }
+    private List<Integer> leafsBiggerThan(Integer value, TreeNode current){
+
+        List<Integer> leafs=new ArrayList<>();
+
+        if (current.getRight()==null && current.getLeft()==null && value<current.getValue()){
+            leafs.add(current.getValue());
+        }
+        else if (current.getRight()==null){
+            leafs.addAll(leafsBiggerThan(value,current.getLeft()));
+        }else if (current.getLeft()==null){
+            leafs.addAll(leafsBiggerThan(value,current.getRight()));
+        }else {
+            leafs.addAll(leafsBiggerThan(value,current.getRight()));
+            leafs.addAll(leafsBiggerThan(value,current.getLeft()));
+        }
+
+        return leafs;
+    }
+
 
 }
+
+
 
 

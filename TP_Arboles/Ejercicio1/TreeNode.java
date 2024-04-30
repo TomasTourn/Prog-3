@@ -1,4 +1,4 @@
-package TP_Arboles;
+package TP_Arboles.Ejercicio1;
 
 public class TreeNode {
 
