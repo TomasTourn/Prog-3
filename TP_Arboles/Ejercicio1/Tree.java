@@ -290,7 +290,7 @@ public class Tree {
             return current.getValue()+sum(current.getRight());
         }
     }
-    
+
     //option 1 more optimized
     public List<Integer>leafsBigger(Integer value){
         List<Integer>leafs=new ArrayList<>();
