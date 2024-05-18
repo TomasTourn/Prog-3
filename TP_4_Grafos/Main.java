@@ -68,6 +68,8 @@ public class Main {
         //  }
 
         DepthFirstSearch recorrido=new DepthFirstSearch<>(grafito);
-        recorrido.dfs();
+       // recorrido.dfs();
+        BreadthFirstSearch rAmplitud=new BreadthFirstSearch(grafito);
+        rAmplitud.bfs();
     }
 }
