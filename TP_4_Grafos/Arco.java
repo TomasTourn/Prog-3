@@ -24,5 +24,12 @@ public class Arco<T> {
     public T getEtiqueta() {
         return etiqueta;
     }
+    public boolean equals(Object o){//verificar si anda cuando te pasan un null
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Arco otro= (Arco) o;
+        return  (otro.getVerticeOrigen()==this.verticeOrigen) && (otro.getVerticeDestino()==this.getVerticeDestino());
+    }
 
 }
