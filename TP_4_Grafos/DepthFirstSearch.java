@@ -8,10 +8,12 @@ public class DepthFirstSearch <T>{
 
     private Grafo<T> grafo;
     private HashMap<Integer,String>verticePintado;
+    private boolean ciclo;
 
     public DepthFirstSearch(Grafo<T> grafo) {
         this.grafo = grafo;
         verticePintado=new HashMap<>();
+        this.ciclo=false;
     }
 
 
@@ -43,7 +45,11 @@ public class DepthFirstSearch <T>{
                 Integer actual= adyacentes.next();
                 if (verticePintado.get(actual).equalsIgnoreCase("BLANCO")){
                     dfs_visit(actual);
+                }else if (verticePintado.get(actual).equalsIgnoreCase("AMARILLO")) {
+                    // Si encontramos un vértice "AMARILLO", hay un ciclo
+                    ciclo = true;
                 }
+
             }
 
             verticePintado.put(vertice,"NEGRO");
